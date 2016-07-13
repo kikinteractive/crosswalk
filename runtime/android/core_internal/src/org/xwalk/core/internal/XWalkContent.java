@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.util.Locale;
+import java.util.Map;
 
 import org.chromium.base.annotations.CalledByNative;
 import org.chromium.base.annotations.JNINamespace;
@@ -263,6 +264,10 @@ class XWalkContent implements XWalkPreferencesInternal.KeyValueChangeListener {
     }
 
     void doLoadUrl(String url, String content) {
+        doLoadUrl(url, content, null);
+    }
+
+    void doLoadUrl(String url, String content, Map<String, String> headers) {
         // Handle the same url loading by parameters.
         if (url != null && !url.isEmpty() &&
                 TextUtils.equals(url, mWebContents.getUrl())) {
@@ -286,6 +291,7 @@ class XWalkContent implements XWalkPreferencesInternal.KeyValueChangeListener {
                 }
             }
             params.setOverrideUserAgent(UserAgentOverrideOption.TRUE);
+            if (headers != null) params.setExtraHeaders(headers);
             mNavigationController.loadUrl(params);
         }
 
@@ -293,6 +299,10 @@ class XWalkContent implements XWalkPreferencesInternal.KeyValueChangeListener {
     }
 
     public void loadUrl(String url, String data) {
+        loadUrl(url, data, null);
+    }
+
+    public void loadUrl(String url, String data, Map<String, String> headers) {
         if (mNativeContent == 0) return;
 
         if ((url == null || url.isEmpty()) &&
@@ -300,7 +310,7 @@ class XWalkContent implements XWalkPreferencesInternal.KeyValueChangeListener {
             return;
         }
 
-        doLoadUrl(url, data);
+        doLoadUrl(url, data, headers);
         mIsLoaded = true;
     }
 

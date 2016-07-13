@@ -39,6 +39,7 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 import org.chromium.base.ActivityState;
 import org.chromium.base.ApplicationStatus;
@@ -416,6 +417,13 @@ public class XWalkViewInternal extends android.widget.FrameLayout {
         if (mContent == null) return;
         checkThreadSafety();
         mContent.loadUrl(url, content);
+    }
+
+    @XWalkAPI
+    public void load(String url, String content, Map<String, String> headers) {
+        if (mContent == null) return;
+        checkThreadSafety();
+        mContent.loadUrl(url, content, headers);
     }
 
     /**
