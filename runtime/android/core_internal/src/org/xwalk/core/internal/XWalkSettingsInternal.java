@@ -340,6 +340,7 @@ public class XWalkSettingsInternal {
     /**
      * See {@link android.webkit.WebSettings#setJavaScriptEnabled}.
      */
+    @XWalkAPI
     public void setJavaScriptEnabled(boolean flag) {
         synchronized (mXWalkSettingsLock) {
             if (mJavaScriptEnabled != flag) {
