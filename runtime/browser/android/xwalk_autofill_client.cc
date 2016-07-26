@@ -169,7 +169,6 @@ void XWalkAutofillClient::DidFillOrPreviewField(
 }
 
 void XWalkAutofillClient::OnFirstUserGestureObserved() {
-  NOTIMPLEMENTED();
 }
 
 void XWalkAutofillClient::LinkClicked(const GURL& url,
